@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div id="app">
+	<input id="inputID" type="text"/>
+	<span id="textID"></span>
+</div>
+<script type="text/javascript">
+	var dom=nodeToFragment(document.getElementById("app"));
+	console.log(dom);
+	function nodeToFragment(node) {
+        console.log(node.nodeType);
+		var flag=document.createDocumentFragment();
+		var child;
+		while (child=node.firstChild) {
+		    flag.appendChild(child)
+		}
+		return flag
+    }
+    document.getElementById("app").appendChild(dom);
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="test">
+    {{text}}
+</div>
+<script>
+function nodeToFragment(node,vm) {
+    var flag=document.createDocumentFragment();
+    var child;
+    while (child=node.firstChild){
+        flag.appendChild(child);//劫持子节点到文档片段中
+    }
+    return flag
+}
+function complie(node,vm){
+    var reg=/\{\{(.*)\}\}/;
+    if(node.nodeType===1){//元素
+        var attr=node.attributes;
+        for(var i=0;i<attr.length;i++){
+            if(attr[i].nodeName=="v-model"){
+                var name=attr[i].nodeValue;//获取v-model绑定的属性名
+                node.value=vm.data[name];//赋值
+                node.removeAttribute("v-model");
+            }
+        }
+    }
+    if(node.nodeType===3){//文本
+        if(reg.test(node.nodeValue)){
+
+        }
+    }
+}
+</script>
+</body>
+</html>

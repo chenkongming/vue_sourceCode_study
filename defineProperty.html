@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<input id="test"/>
+<span id="mySpan"></span>
+<script type="text/javascript">
+	var obj={};
+	Object.defineProperty(obj,"hello",{
+		set:function (newVal) {
+			document.getElementById("test").value=newVal;
+			document.getElementById("mySpan").innerHTML=newVal;
+        }
+    });
+	document.addEventListener("input",function (e) {
+		obj.hello=e.target.value;
+    });
+    obj.hello="ttjfhf"
+</script>
+</body>
+</html>
