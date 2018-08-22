@@ -6,7 +6,7 @@
 </head>
 <body>
 <div id="app">
-    <input type="text" v-model="test">
+    <input type="text" v-model="text">
     {{text}}
 </div>
 <script>
@@ -14,6 +14,7 @@ function nodeToFragment(node,vm) {
     var flag=document.createDocumentFragment();
     var child;
     while (child=node.firstChild){
+        complie(child,vm);
         flag.appendChild(child);//劫持子节点到文档片段中
     }
     return flag
@@ -34,7 +35,7 @@ function complie(node,vm){
         if(reg.test(node.nodeValue)){
             var name=RegExp.$1;
             name=name.trim();
-            node.nodeValue=vm[name];
+            node.nodeValue=vm.data[name];
         }
     }
 }
@@ -51,7 +52,7 @@ function defineReactive(obj,key,val) {
     })
 }
 function observe(obj,vm) {
-    Object.keys(obj).forEach(function (key) {
+    Object.keys(obj).forEach(function (key) {//Object.keys 返回有key组成的array
         defineReactive(vm,key,obj[key])
     })
 }
